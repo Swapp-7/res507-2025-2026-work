@@ -9,26 +9,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Récupération code
       - name: Check out repository
         uses: actions/checkout@v4
 
-      # Setup Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "24"
 
-      # Installation dépendances
       - name: Install dependencies
         working-directory: labs/40-containerized-node-app/app
         run: npm ci
 
-      - name: Fail intentionnel
-        run: exit 1
+      - name: Run tests if present
+        working-directory: app
+        run: npm test --if-present
 
-      # Build image
-      # Note : on se place dans le dossier du lab pour que Docker trouve le Dockerfile
       - name: Build Docker image
         run: |
           cd labs/40-containerized-node-app
@@ -49,7 +45,7 @@ jobs:
           docker logs quote-app || true
           exit 1
 
-      # Nettoyage conteneur
       - name: Stop container
         if: always()
-        run: docker rm -f quote-app || true
+        run: |
+          docker rm -f quote-app || true
