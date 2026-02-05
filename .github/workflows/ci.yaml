@@ -24,6 +24,9 @@ jobs:
         working-directory: labs/40-containerized-node-app/app
         run: npm ci
 
+      - name: Fail intentionnel
+        run: exit 1
+
       # Build image
       # Note : on se place dans le dossier du lab pour que Docker trouve le Dockerfile
       - name: Build Docker image
