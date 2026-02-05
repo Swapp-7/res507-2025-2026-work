@@ -32,7 +32,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          cd labs/40-containerized-node-app
+          cd labs/40-containerized-node-apppp
           docker build -t quote-app -f docker/Dockerfile .
 
       - name: Run container
