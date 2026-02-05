@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QuoteBoard</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      background: #111;
+      color: #eee;
+    }
+
+    form {
+      display: grid;
+      gap: .5rem;
+      margin-bottom: 2rem;
+    }
+
+    input,
+    textarea,
+    button {
+      font: inherit;
+      margin-top: 0.5rem;
+    }
+
+    .quote {
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>QuoteBoard</h1>
+
+  <form method="post" action="/quotes">
+    <input name="author" placeholder="Author (optional)" />
+    <textarea name="text" placeholder="Write a quote..." required></textarea>
+    <button type="submit">Add quote</button>
+  </form>
+
+  {{#if quotes.length}}
+  {{#each quotes}}
+  <div class="quote">
+    <div>{{this.text}}</div>
+    <div>— {{this.author}}</div>
+  </div>
+  {{/each}}
+  {{else}}
+  <p>No quotes yet. Add the first one.</p>
+  {{/if}}
+</body>
+
+</html>
